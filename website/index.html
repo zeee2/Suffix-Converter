@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="assets/css.css" />
 <div class="wrapper">
   <form>
@@ -19,14 +18,42 @@
     </div>
 
     <div class="btn-box">
-      <button class="btn btn-submit" type="submit">변경하기</button>
+      <button class="btn btn-submit" type="button" onClick="change_suffix()">변경하기</button>
     </div>
     <div class="group">
-      <textarea type="textarea" id='result' rows="8" required="required"></textarea><span class="highlight"></span><span class="bar"></span>
+      <textarea type="textarea" id='result' rows="8"></textarea><span class="highlight"></span><span class="bar"></span>
       <label>출력:</label>
     </div>
     <div class="btn-box">
       <button class="btn btn-cancel" type="button">복사하기</button>
     </div>
   </form>
+
+  <script>
+    function change_suffix(){
+        console.log('ok');
+        
+        var origin = document.getElementById('origin').value;
+        var before = document.getElementById('before').value;
+        var after = document.getElementById('after').value;
+        
+        const api_url3 = 'https://api.종결어미.site/api/v1?txt=' + origin + '&before=' + before + '&after=' + after;
+        const api_url = 'http://127.0.0.1:1234/api/v1?txt=' + origin + '&before=' + before + '&after=' + after;
+        console.log(api_url);
+        const headers = new Headers({
+          'Content-Type': 'text/xml',
+        });
+        fetch(api_url,  headers ).then((resp) => {
+            return resp.json();
+        }).then((json) => {
+            if (!json) return false;
+            console.log(json);
+
+            document.getElementById('result').value = json['result'];     
+
+        }).catch(() => {
+            document.getElementById('result').value = "변환실패!";   
+        })
+    }
+  </script>
 </div>
