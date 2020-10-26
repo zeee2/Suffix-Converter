@@ -1,0 +1,32 @@
+
+<link rel="stylesheet" href="assets/css.css" />
+<div class="wrapper">
+  <form>
+    <h1><strong>종결어미 컨버터</strong></h1>
+<h5>문장 끝의 어미를 편하게 바꿔주는 툴입니다.</h5>
+    <hr class="sep"/>
+    <div class="group">
+      <textarea type="textarea" rows="8" required="required" id = 'origin'></textarea><span class="highlight"></span><span class="bar"></span>
+      <label>입력하세요.</label>
+    </div>
+    <div class="group">
+      <input type="text" required="required" id='before'/><span class="highlight"></span><span class="bar"></span>
+      <label>전 종결어미 | (예: 임)</label>
+    </div>
+    <div class="group">
+      <input type="text" required="required" id='after'/><span class="highlight"></span><span class="bar"></span>
+      <label>후 종결어미 | (예: 이다)</label>
+    </div>
+
+    <div class="btn-box">
+      <button class="btn btn-submit" type="submit">변경하기</button>
+    </div>
+    <div class="group">
+      <textarea type="textarea" id='result' rows="8" required="required"></textarea><span class="highlight"></span><span class="bar"></span>
+      <label>출력:</label>
+    </div>
+    <div class="btn-box">
+      <button class="btn btn-cancel" type="button">복사하기</button>
+    </div>
+  </form>
+</div>
