@@ -2,7 +2,6 @@ from flask import Flask, request
 from flask_restful import Resource, Api, reqparse
 from sqlalchemy import create_engine
 import json
-from flask_cors import CORS
 from flask_jsonpify import jsonify
 from bin.functions import *
 import pymysql
@@ -10,7 +9,6 @@ import pymysql
 import random
 
 app = Flask('Suffix-Converter')
-CORS(app)
 api = Api(app)
 
 class mainclass(Resource):
