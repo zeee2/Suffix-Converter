@@ -21,16 +21,18 @@ class mainclass(Resource):
 class Converter(Resource):
     def get(self):
         parser = reqparse.RequestParser()
+        parser.add_argument('sc', required=True, type=int, help="")
         parser.add_argument('txt', required=True, type=str, help="")
         parser.add_argument('before', required=True, type=str, help="")
         parser.add_argument('after', required=True, type=str, help="")
         args = parser.parse_args() 
 
+        sc = args['sc']
         txt = args['txt']
         before = args['before']
         after = args['after']
 
-        result = convert_text(txt, before, after)
+        result = convert_text(sc, txt, before, after)
 
         return result
 

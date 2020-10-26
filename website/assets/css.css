@@ -19,6 +19,7 @@ form h1 {
   font-weight: 300;
   text-align: center;
   color: #2196F3;
+  margin: 0;
 }
 form h5 {
   text-align: center;
@@ -31,7 +32,7 @@ form hr.sep {
   border: none;
   height: 2px;
   width: 25%;
-  margin: 0px auto 45px auto;
+  margin: 0px auto 25px auto;
 }
 form .emoji {
   font-size: 1.2em;
@@ -40,6 +41,30 @@ form .emoji {
 .group {
   position: relative;
   margin: 45px 0;
+}
+
+.btns.group {
+  position: relative;
+  margin: 45px 0;
+  height: 80px;
+}
+
+.main.group {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10px;
+}
+
+.txt.group {
+  position: relative;
+  margin: 0px;
+}
+
+.first.group {
+  position: relative;
+  margin: 25px 0; 
 }
 
 textarea {
@@ -53,7 +78,7 @@ textarea {
   font-size: 18px;
   padding: 10px 10px 10px 5px;
   display: block;
-  width: 600px;
+  width: 100%;
   border: none;
   border-radius: 0;
   border-bottom: 1px solid #c6c6c6;
@@ -71,7 +96,7 @@ textarea:valid ~ label {
 }
 input:focus ~ .bar:before,
 textarea:focus ~ .bar:before {
-  width: 600px;
+  width: 100%;
 }
 
 input[type="password"] {
@@ -93,7 +118,7 @@ label {
 .bar {
   position: relative;
   display: block;
-  width: 600px;
+  width: 100%;
 }
 .bar:before {
   content: '';
@@ -155,5 +180,70 @@ label {
 
 .btn-box {
   text-align: center;
-  margin: 50px 0;
+  margin: 30px 0 50px 0;
+}
+
+a {
+	text-decoration: none;
+	opacity: .6;
+	padding: 60px;
+	font-weight: bolder;
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	font-size: 1.4em;
+}
+
+a:hover {
+	opacity: 1;
+}
+
+#container {
+	width: 160px;
+	height: 36px;
+	margin: auto;
+	position: relative;
+	border-radius: 6px;
+	overflow: hidden;
+	user-select: none;
+	cursor: pointer;
+}
+
+.inner-container {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: inherit;
+	height: inherit;
+	text-transform: uppercase;
+	font-size: .6em;
+	letter-spacing: .2em;
+}
+
+.inner-container:first-child {
+	background: #e9e9e9;
+	color: #a9a9a9;
+}
+
+.inner-container:nth-child(2) {
+	background: dodgerblue;
+	color: white;
+	clip-path: inset(0 50% 0 0);
+	transition: .3s cubic-bezier(0,0,0,1);
+}
+
+.toggle {
+	width: 50%;
+	position: absolute;
+	height: inherit;
+	display: flex;
+	box-sizing: border-box;
+}
+
+.toggle p {
+	margin: auto;
+}
+
+.toggle:nth-child(1) {
+	right: 0;
 }

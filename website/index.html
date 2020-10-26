@@ -1,59 +1,110 @@
-<link rel="stylesheet" href="assets/css.css" />
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" style="user-select: auto;">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="assets/css.css" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta property="og:title" content="종결어미 컨버터">
+  <link rel="canonical" href="https://종결어미.site/">
+  <link rel="alternate" href="https://종결어미.site/">
+  <meta property="og:url" content="https://종결어미.site/">
+  <meta property="og:site_name" content="종결어미 컨버터">
+  <meta property="og:type" content="website">
+  <meta name="Subject" content="종결어미 컨버터">
+  <meta name="Publisher" content="종결어미 컨버터">
+  <meta name="description" content="종결어미 컨버터는 문장 끝의 어미를 간편하게 바꿔주는 컨버터입니다.">
+  <meta name="author" content="PDJ, KJW">
+  <meta name="Location" content="South Korea">
+  <meta name="copyright" content="Copyright Nerina All rights reserved.">
+  <meta name="keywords" content="종결어미,문장,문장 끝,어미,컨버터,종결어미컨버터,종결어미 컨버터,문장수정,문장 수정,종결어미 수정,종결어미수정,"/>
+  <meta property="article:tag" content="종결어미 변환">
+  <script type="text/javascript">
+      var EC_FRONT_EXTERNAL_SCRIPT_VARIABLE_DATA = {"common_member_id_crypt":""};
+  </script>
+  <title>종결어미 컨버터</title>
+  <meta name="path_role" content="MAIN">
+</head>
 <div class="wrapper">
   <form>
     <h1><strong>종결어미 컨버터</strong></h1>
-<h5>문장 끝의 어미를 편하게 바꿔주는 툴입니다.</h5>
+    <h5>문장 끝의 어미를 간편하게 바꿔주는 툴입니다.</h5>
     <hr class="sep"/>
-    <div class="group">
+    <div class="btns group enable" id="spell_status">
+      <h5>변횐후, 맞춤법 검사를 시행할까요?</h5>
+      <div id="container">
+        <div class="inner-container">
+          <div class="toggle">
+            <p>OFF</p>
+          </div>
+          <div class="toggle">
+            <p>ON</p>
+          </div>
+        </div>
+        <div class="inner-container" id='toggle-container'>
+          <div class="toggle">
+            <p>OFF</p>
+          </div>
+          <div class="toggle">
+            <p>ON</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="first group">
       <textarea type="textarea" rows="8" required="required" id = 'origin'></textarea><span class="highlight"></span><span class="bar"></span>
       <label>입력하세요.</label>
     </div>
-    <div class="group">
-      <input type="text" required="required" id='before'/><span class="highlight"></span><span class="bar"></span>
-      <label>전 종결어미 | (예: 임)</label>
-    </div>
-    <div class="group">
-      <input type="text" required="required" id='after'/><span class="highlight"></span><span class="bar"></span>
-      <label>후 종결어미 | (예: 이다)</label>
+    <div class="main group">
+      <div class="txt group" style="width: 260px">
+        <input type="text" required="required" id='before'/><span class="highlight"></span><span class="bar"></span>
+        <label>전 | 종결어미 (예시: 임)</label>
+      </div>
+      <div class="txt group" style="width: 260px; margin-left: 20px;">
+        <input type="text" required="required" id='after'/><span class="highlight"></span><span class="bar"></span>
+        <label>후 | 종결어미 (예시: 이다)</label>
+      </div>
     </div>
 
     <div class="btn-box">
       <button class="btn btn-submit" type="button" onClick="change_suffix()">변경하기</button>
     </div>
     <div class="group">
-      <textarea type="textarea" id='result' rows="8"></textarea><span class="highlight"></span><span class="bar"></span>
+      <textarea type="textarea" rows="8" id='result'></textarea><span class="highlight"></span><span class="bar"></span>
       <label>출력:</label>
     </div>
     <div class="btn-box">
-      <button class="btn btn-cancel" type="button">복사하기</button>
+      <button class="btn btn-cancel" type="button" onClick="copy_result()">복사하기</button>
     </div>
   </form>
-
+  <script src="assets/js.js"></script>
   <script>
-    function change_suffix(){
-        console.log('ok');
-        
-        var origin = document.getElementById('origin').value;
-        var before = document.getElementById('before').value;
-        var after = document.getElementById('after').value;
-        
-        const api_url3 = 'https://api.종결어미.site/api/v1?txt=' + origin + '&before=' + before + '&after=' + after;
-        const api_url = 'http://127.0.0.1:1234/api/v1?txt=' + origin + '&before=' + before + '&after=' + after;
-        console.log(api_url);
-        const headers = new Headers({
-          'Content-Type': 'text/xml',
-        });
-        fetch(api_url,  headers ).then((resp) => {
-            return resp.json();
-        }).then((json) => {
-            if (!json) return false;
-            console.log(json);
+    spellchk = false;
+    var toggle = document.getElementById('container');
+    var toggleContainer = document.getElementById('toggle-container');
+    var togglebox = document.getElementById('spell_status');
+    toggleContainer.style.clipPath = 'inset(0 0 0 50%)';
+    togglebox.className = 'btns group disable';
+    toggleContainer.style.backgroundColor = '#D74046';
+  </script>
+  <script>
+    var toggle = document.getElementById('container');
+    var toggleContainer = document.getElementById('toggle-container');
+    var togglebox = document.getElementById('spell_status');
+    var spellchk;
 
-            document.getElementById('result').value = json['result'];     
+    toggle.addEventListener('click', function() {
+      spellchk = !spellchk;
+      if (spellchk) {
+        toggleContainer.style.clipPath = 'inset(0 50% 0 0)';
+        togglebox.className = 'btns group enable';
+        toggleContainer.style.backgroundColor = 'dodgerblue';
 
-        }).catch(() => {
-            document.getElementById('result').value = "변환실패!";   
-        })
-    }
+      } else {
+        toggleContainer.style.clipPath = 'inset(0 0 0 50%)';
+        togglebox.className = 'btns group disable';
+        toggleContainer.style.backgroundColor = '#D74046';
+      }
+    });
   </script>
 </div>
